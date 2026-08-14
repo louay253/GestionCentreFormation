@@ -1,0 +1,1178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+
+ <class>MainWindow</class>
+
+ <widget class="QMainWindow" name="MainWindow">
+
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1100</width>
+    <height>900</height>
+   </rect>
+  </property>
+
+  <property name="windowTitle">
+   <string>Gestion Centre Formation</string>
+  </property>
+
+
+  <widget class="QWidget" name="centralwidget">
+
+   <layout class="QVBoxLayout" name="verticalLayout_main">
+
+    <item>
+
+     <widget class="QTabWidget" name="tabWidget">
+
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+
+
+      <!-- ================================================= -->
+      <!-- ONGLET 1 : FORMATEURS -->
+      <!-- ================================================= -->
+
+      <widget class="QWidget" name="tab_gestion_formateurs">
+
+       <attribute name="title">
+        <string>Gestion Formateurs</string>
+       </attribute>
+
+       <layout class="QVBoxLayout" name="verticalLayout_formateurs">
+
+
+        <!-- FORMULAIRE FORMATEUR -->
+
+        <item>
+
+         <widget class="QGroupBox" name="groupBox_formateur">
+
+          <property name="title">
+           <string>Formulaire Formateur</string>
+          </property>
+
+          <layout class="QFormLayout" name="formLayout_formateur">
+
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_nom">
+             <property name="text">
+              <string>Nom</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="ui_nom"/>
+           </item>
+
+
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_prenom">
+             <property name="text">
+              <string>Prénom</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="ui_prenom"/>
+           </item>
+
+
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_email">
+             <property name="text">
+              <string>Email</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="ui_email"/>
+           </item>
+
+
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_tel">
+             <property name="text">
+              <string>Téléphone</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="ui_tel"/>
+           </item>
+
+
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_specialite">
+             <property name="text">
+              <string>Spécialité</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="4" column="1">
+            <widget class="QLineEdit" name="ui_specialite"/>
+           </item>
+
+
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_date_embauche">
+             <property name="text">
+              <string>Date d'embauche</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="5" column="1">
+
+            <widget class="QDateEdit" name="ui_date_embauche">
+
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+
+             <property name="date">
+              <date>
+               <year>2026</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+
+            </widget>
+
+           </item>
+
+          </layout>
+
+         </widget>
+
+        </item>
+
+
+        <!-- BOUTONS FORMATEUR -->
+
+        <item>
+
+         <layout class="QHBoxLayout" name="horizontalLayout_btn_formateur">
+
+          <item>
+           <widget class="QPushButton" name="btn_ajouter">
+            <property name="text">
+             <string>Ajouter</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_modifier">
+            <property name="text">
+             <string>Modifier</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QLabel" name="label_id_suppr">
+            <property name="text">
+             <string>ID :</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QLineEdit" name="ui_id_suppr">
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_supprimer">
+            <property name="text">
+             <string>Supprimer</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_actualiser">
+            <property name="text">
+             <string>Actualiser</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_pdf_formateur">
+            <property name="text">
+             <string>Générer PDF</string>
+            </property>
+            <property name="toolTip">
+             <string>Générer la liste des formateurs au format PDF</string>
+            </property>
+           </widget>
+          </item>
+
+         </layout>
+
+        </item>
+
+
+        <!-- RECHERCHE + TRI FORMATEUR -->
+
+        <item>
+
+         <widget class="QGroupBox" name="groupBox_recherche_tri_formateur">
+
+          <property name="title">
+           <string>Recherche et tri multicritères</string>
+          </property>
+
+          <layout class="QVBoxLayout" name="verticalLayout_recherche_tri_formateur">
+
+           <item>
+
+            <layout class="QHBoxLayout" name="horizontalLayout_recherche_formateur">
+
+             <item>
+              <widget class="QLabel" name="label_recherche_nom_formateur">
+               <property name="text">
+                <string>Nom :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+              <widget class="QLineEdit" name="ui_recherche_nom_formateur">
+               <property name="placeholderText">
+                <string>Nom du formateur</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+              <widget class="QLabel" name="label_recherche_specialite_formateur">
+               <property name="text">
+                <string>Spécialité :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+              <widget class="QLineEdit" name="ui_recherche_specialite_formateur">
+               <property name="placeholderText">
+                <string>Spécialité</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+              <widget class="QLabel" name="label_recherche_date_formateur">
+               <property name="text">
+                <string>Embauché depuis :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+
+              <widget class="QDateEdit" name="ui_recherche_date_formateur">
+
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+
+               <property name="date">
+                <date>
+                 <year>2000</year>
+                 <month>1</month>
+                 <day>1</day>
+                </date>
+               </property>
+
+              </widget>
+
+             </item>
+
+             <item>
+              <widget class="QPushButton" name="btn_rechercher_formateur">
+               <property name="text">
+                <string>Rechercher</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+              <widget class="QPushButton" name="btn_reset_recherche_formateur">
+               <property name="text">
+                <string>Réinitialiser</string>
+               </property>
+              </widget>
+             </item>
+
+            </layout>
+
+           </item>
+
+
+           <item>
+
+            <layout class="QHBoxLayout" name="horizontalLayout_tri_formateur">
+
+             <item>
+              <widget class="QLabel" name="label_tri_formateur">
+               <property name="text">
+                <string>Trier par :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+
+              <widget class="QComboBox" name="ui_tri_formateur">
+
+               <item>
+                <property name="text">
+                 <string>Nom</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Spécialité</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Date d'embauche</string>
+                </property>
+               </item>
+
+              </widget>
+
+             </item>
+
+             <item>
+              <widget class="QLabel" name="label_ordre_formateur">
+               <property name="text">
+                <string>Ordre :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+
+              <widget class="QComboBox" name="ui_ordre_formateur">
+
+               <item>
+                <property name="text">
+                 <string>Croissant</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Décroissant</string>
+                </property>
+               </item>
+
+              </widget>
+
+             </item>
+
+             <item>
+              <widget class="QPushButton" name="btn_trier_formateur">
+               <property name="text">
+                <string>Trier</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+
+              <spacer name="horizontalSpacer_tri_formateur">
+
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+
+              </spacer>
+
+             </item>
+
+            </layout>
+
+           </item>
+
+          </layout>
+
+         </widget>
+
+        </item>
+
+
+        <!-- TABLEAU FORMATEUR -->
+
+        <item>
+
+         <widget class="QTableView" name="tab_formateur">
+
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+
+          <property name="editTriggers">
+           <enum>QAbstractItemView::NoEditTriggers</enum>
+          </property>
+
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>180</height>
+           </size>
+          </property>
+
+         </widget>
+
+        </item>
+
+
+        <!-- STATISTIQUES FORMATEUR -->
+
+        <item>
+
+         <widget class="QGroupBox" name="groupBox_statistiques_formateur">
+
+          <property name="title">
+           <string>Statistiques des formateurs par spécialité</string>
+          </property>
+
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>300</height>
+           </size>
+          </property>
+
+          <layout class="QVBoxLayout" name="verticalLayout_statistiques_formateur">
+
+           <item>
+
+            <widget class="QWidget" name="widget_graphique_formateur" native="true">
+
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>260</height>
+              </size>
+             </property>
+
+             <layout class="QVBoxLayout" name="layout_graphique_formateur">
+
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+
+             </layout>
+
+            </widget>
+
+           </item>
+
+          </layout>
+
+         </widget>
+
+        </item>
+
+       </layout>
+
+      </widget>
+
+
+      <!-- ================================================= -->
+      <!-- ONGLET 2 : STAGIAIRES -->
+      <!-- ================================================= -->
+
+      <widget class="QWidget" name="tab_gestion_stagiaires">
+
+       <attribute name="title">
+        <string>Gestion Stagiaires</string>
+       </attribute>
+
+       <layout class="QVBoxLayout" name="verticalLayout_stagiaires">
+
+
+        <!-- FORMULAIRE STAGIAIRE -->
+
+        <item>
+
+         <widget class="QGroupBox" name="groupBox_stagiaire">
+
+          <property name="title">
+           <string>Formulaire Stagiaire</string>
+          </property>
+
+          <layout class="QFormLayout" name="formLayout_stagiaire">
+
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_nom_s">
+             <property name="text">
+              <string>Nom</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="ui_nom_stagiaire"/>
+           </item>
+
+
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_prenom_s">
+             <property name="text">
+              <string>Prénom</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="ui_prenom_stagiaire"/>
+           </item>
+
+
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_email_s">
+             <property name="text">
+              <string>Email</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="ui_email_stagiaire"/>
+           </item>
+
+
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_tel_s">
+             <property name="text">
+              <string>Téléphone</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="ui_tel_stagiaire"/>
+           </item>
+
+
+           <item row="4" column="0">
+            <widget class="QLabel" name="label_age_s">
+             <property name="text">
+              <string>Âge</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="4" column="1">
+
+            <widget class="QSpinBox" name="ui_age_stagiaire">
+
+             <property name="minimum">
+              <number>16</number>
+             </property>
+
+             <property name="maximum">
+              <number>100</number>
+             </property>
+
+             <property name="value">
+              <number>18</number>
+             </property>
+
+            </widget>
+
+           </item>
+
+
+           <item row="5" column="0">
+            <widget class="QLabel" name="label_niveau_s">
+             <property name="text">
+              <string>Niveau</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="5" column="1">
+
+            <widget class="QComboBox" name="ui_niveau_stagiaire">
+
+             <item>
+              <property name="text">
+               <string>Débutant</string>
+              </property>
+             </item>
+
+             <item>
+              <property name="text">
+               <string>Intermédiaire</string>
+              </property>
+             </item>
+
+             <item>
+              <property name="text">
+               <string>Avancé</string>
+              </property>
+             </item>
+
+            </widget>
+
+           </item>
+
+
+           <item row="6" column="0">
+            <widget class="QLabel" name="label_date_s">
+             <property name="text">
+              <string>Date d'inscription</string>
+             </property>
+            </widget>
+           </item>
+
+           <item row="6" column="1">
+
+            <widget class="QDateEdit" name="ui_date_stagiaire">
+
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+
+             <property name="date">
+              <date>
+               <year>2026</year>
+               <month>1</month>
+               <day>1</day>
+              </date>
+             </property>
+
+            </widget>
+
+           </item>
+
+          </layout>
+
+         </widget>
+
+        </item>
+
+
+        <!-- ================================================= -->
+        <!-- BOUTONS STAGIAIRE -->
+        <!-- ================================================= -->
+
+        <item>
+
+         <layout class="QHBoxLayout" name="horizontalLayout_btn_stagiaire">
+
+          <item>
+           <widget class="QPushButton" name="btn_ajouter_stagiaire">
+            <property name="text">
+             <string>Ajouter</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_modifier_stagiaire">
+            <property name="text">
+             <string>Modifier</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QLabel" name="label_id_suppr_s">
+            <property name="text">
+             <string>ID :</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+
+           <widget class="QLineEdit" name="ui_id_suppr_stagiaire">
+
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+
+           </widget>
+
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_supprimer_stagiaire">
+            <property name="text">
+             <string>Supprimer</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_actualiser_stagiaire">
+            <property name="text">
+             <string>Actualiser</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+
+           <widget class="QPushButton" name="btn_pdf_stagiaire">
+
+            <property name="text">
+             <string>Générer PDF</string>
+            </property>
+
+            <property name="toolTip">
+             <string>Générer la liste des stagiaires au format PDF</string>
+            </property>
+
+           </widget>
+
+          </item>
+
+
+          <!-- QR CODE -->
+
+          <item>
+
+           <widget class="QPushButton" name="btn_qr_stagiaire">
+
+            <property name="text">
+             <string>Générer QR Code</string>
+            </property>
+
+            <property name="toolTip">
+             <string>Générer le QR Code du stagiaire sélectionné</string>
+            </property>
+
+           </widget>
+
+          </item>
+
+
+          <!-- MAILING -->
+
+          <item>
+
+           <widget class="QPushButton" name="btn_email_stagiaire">
+
+            <property name="text">
+             <string>Envoyer Email</string>
+            </property>
+
+            <property name="toolTip">
+             <string>Envoyer un email au stagiaire sélectionné</string>
+            </property>
+
+           </widget>
+
+          </item>
+
+
+         </layout>
+
+        </item>
+
+
+        <!-- RECHERCHE + TRI STAGIAIRE -->
+
+        <item>
+
+         <widget class="QGroupBox" name="groupBox_recherche_tri_stagiaire">
+
+          <property name="title">
+           <string>Recherche et tri multicritères</string>
+          </property>
+
+          <layout class="QVBoxLayout" name="verticalLayout_recherche_tri_stagiaire">
+
+           <item>
+
+            <layout class="QHBoxLayout" name="horizontalLayout_recherche_stagiaire">
+
+             <item>
+              <widget class="QLabel" name="label_recherche_nom_stagiaire">
+               <property name="text">
+                <string>Nom :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+              <widget class="QLineEdit" name="ui_recherche_nom_stagiaire">
+               <property name="placeholderText">
+                <string>Nom du stagiaire</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+              <widget class="QLabel" name="label_recherche_niveau_stagiaire">
+               <property name="text">
+                <string>Niveau :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+
+              <widget class="QComboBox" name="ui_recherche_niveau_stagiaire">
+
+               <item>
+                <property name="text">
+                 <string>Tous</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Débutant</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Intermédiaire</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Avancé</string>
+                </property>
+               </item>
+
+              </widget>
+
+             </item>
+
+             <item>
+              <widget class="QLabel" name="label_recherche_age_stagiaire">
+               <property name="text">
+                <string>Âge min :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+
+              <widget class="QSpinBox" name="ui_recherche_age_stagiaire">
+
+               <property name="minimum">
+                <number>0</number>
+               </property>
+
+               <property name="maximum">
+                <number>100</number>
+               </property>
+
+               <property name="specialValueText">
+                <string>Tous</string>
+               </property>
+
+              </widget>
+
+             </item>
+
+             <item>
+              <widget class="QPushButton" name="btn_rechercher_stagiaire">
+               <property name="text">
+                <string>Rechercher</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+              <widget class="QPushButton" name="btn_reset_recherche_stagiaire">
+               <property name="text">
+                <string>Réinitialiser</string>
+               </property>
+              </widget>
+             </item>
+
+            </layout>
+
+           </item>
+
+
+           <item>
+
+            <layout class="QHBoxLayout" name="horizontalLayout_tri_stagiaire">
+
+             <item>
+              <widget class="QLabel" name="label_tri_stagiaire">
+               <property name="text">
+                <string>Trier par :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+
+              <widget class="QComboBox" name="ui_tri_stagiaire">
+
+               <item>
+                <property name="text">
+                 <string>Nom</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Âge</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Niveau</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Date inscription</string>
+                </property>
+               </item>
+
+              </widget>
+
+             </item>
+
+             <item>
+              <widget class="QLabel" name="label_ordre_stagiaire">
+               <property name="text">
+                <string>Ordre :</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+
+              <widget class="QComboBox" name="ui_ordre_stagiaire">
+
+               <item>
+                <property name="text">
+                 <string>Croissant</string>
+                </property>
+               </item>
+
+               <item>
+                <property name="text">
+                 <string>Décroissant</string>
+                </property>
+               </item>
+
+              </widget>
+
+             </item>
+
+             <item>
+              <widget class="QPushButton" name="btn_trier_stagiaire">
+               <property name="text">
+                <string>Trier</string>
+               </property>
+              </widget>
+             </item>
+
+             <item>
+
+              <spacer name="horizontalSpacer_tri_stagiaire">
+
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+
+              </spacer>
+
+             </item>
+
+            </layout>
+
+           </item>
+
+          </layout>
+
+         </widget>
+
+        </item>
+
+
+        <!-- TABLEAU STAGIAIRE -->
+
+        <item>
+
+         <widget class="QTableView" name="tab_stagiaire">
+
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+
+          <property name="editTriggers">
+           <enum>QAbstractItemView::NoEditTriggers</enum>
+          </property>
+
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>180</height>
+           </size>
+          </property>
+
+         </widget>
+
+        </item>
+
+
+        <!-- STATISTIQUES STAGIAIRE -->
+
+        <item>
+
+         <widget class="QGroupBox" name="groupBox_statistiques_stagiaire">
+
+          <property name="title">
+           <string>Statistiques des stagiaires par niveau</string>
+          </property>
+
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>300</height>
+           </size>
+          </property>
+
+          <layout class="QVBoxLayout" name="verticalLayout_statistiques_stagiaire">
+
+           <item>
+
+            <widget class="QWidget" name="widget_graphique_stagiaire" native="true">
+
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>260</height>
+              </size>
+             </property>
+
+             <layout class="QVBoxLayout" name="layout_graphique_stagiaire">
+
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+
+             </layout>
+
+            </widget>
+
+           </item>
+
+          </layout>
+
+         </widget>
+
+        </item>
+
+       </layout>
+
+      </widget>
+
+
+     </widget>
+
+    </item>
+
+   </layout>
+
+  </widget>
+
+
+  <widget class="QMenuBar" name="menubar">
+
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1100</width>
+     <height>22</height>
+    </rect>
+   </property>
+
+  </widget>
+
+
+  <widget class="QStatusBar" name="statusbar"/>
+
+ </widget>
+
+
+ <resources/>
+
+ <connections/>
+
+</ui>

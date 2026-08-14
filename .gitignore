@@ -1,0 +1,13 @@
+build/ 
+*.user 
+*.user.* 
+*.pro.user 
+debug/ 
+release/ 
+*.o 
+*.obj 
+*.exe 
+Makefile 
+Makefile.* 
+.qmake.stash 
+desktop.ini 
