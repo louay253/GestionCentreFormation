@@ -29,6 +29,8 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QIcon>
+#include <QSize>
 #include <QByteArray>
 
 // =====================================================
@@ -47,6 +49,10 @@
 #include <QChartView>
 #include <QPieSeries>
 #include <QPieSlice>
+#include <QBarSeries>
+#include <QBarSet>
+#include <QBarCategoryAxis>
+#include <QValueAxis>
 #include <QLegend>
 #include <QPainter>
 
@@ -60,6 +66,417 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // =================================================
+    // ICONES INTERFACE
+    // =================================================
+
+    const QSize tailleIconeMenu(20, 20);
+    const QSize tailleIconeAction(18, 18);
+
+    // Menu latéral
+    ui->btn_menu_dashboard->setIcon(QIcon(":/icons/home.svg"));
+    ui->btn_menu_formateurs->setIcon(QIcon(":/icons/user.svg"));
+    ui->btn_menu_stagiaires->setIcon(QIcon(":/icons/users.svg"));
+    ui->btn_menu_cours->setIcon(QIcon(":/icons/book.svg"));
+    ui->btn_menu_salles->setIcon(QIcon(":/icons/building.svg"));
+    ui->btn_menu_statistiques->setIcon(QIcon(":/icons/chart.svg"));
+    ui->btn_menu_documents->setIcon(QIcon(":/icons/folder.svg"));
+    ui->btn_menu_parametres->setIcon(QIcon(":/icons/settings.svg"));
+
+    ui->btn_menu_dashboard->setIconSize(tailleIconeMenu);
+    ui->btn_menu_formateurs->setIconSize(tailleIconeMenu);
+    ui->btn_menu_stagiaires->setIconSize(tailleIconeMenu);
+    ui->btn_menu_cours->setIconSize(tailleIconeMenu);
+    ui->btn_menu_salles->setIconSize(tailleIconeMenu);
+    ui->btn_menu_statistiques->setIconSize(tailleIconeMenu);
+    ui->btn_menu_documents->setIconSize(tailleIconeMenu);
+    ui->btn_menu_parametres->setIconSize(tailleIconeMenu);
+
+    // Actions Formateurs
+    ui->btn_ajouter->setIcon(QIcon(":/icons/plus.svg"));
+    ui->btn_modifier->setIcon(QIcon(":/icons/edit.svg"));
+    ui->btn_supprimer->setIcon(QIcon(":/icons/trash.svg"));
+    ui->btn_actualiser->setIcon(QIcon(":/icons/refresh.svg"));
+    ui->btn_pdf_formateur->setIcon(QIcon(":/icons/pdf.svg"));
+    ui->btn_rechercher_formateur->setIcon(QIcon(":/icons/search.svg"));
+    ui->btn_reset_recherche_formateur->setIcon(QIcon(":/icons/refresh.svg"));
+    ui->btn_trier_formateur->setIcon(QIcon(":/icons/sort.svg"));
+
+    ui->btn_ajouter->setIconSize(tailleIconeAction);
+    ui->btn_modifier->setIconSize(tailleIconeAction);
+    ui->btn_supprimer->setIconSize(tailleIconeAction);
+    ui->btn_actualiser->setIconSize(tailleIconeAction);
+    ui->btn_pdf_formateur->setIconSize(tailleIconeAction);
+    ui->btn_rechercher_formateur->setIconSize(tailleIconeAction);
+    ui->btn_reset_recherche_formateur->setIconSize(tailleIconeAction);
+    ui->btn_trier_formateur->setIconSize(tailleIconeAction);
+
+    // Actions Stagiaires
+    ui->btn_ajouter_stagiaire->setIcon(QIcon(":/icons/plus.svg"));
+    ui->btn_modifier_stagiaire->setIcon(QIcon(":/icons/edit.svg"));
+    ui->btn_supprimer_stagiaire->setIcon(QIcon(":/icons/trash.svg"));
+    ui->btn_actualiser_stagiaire->setIcon(QIcon(":/icons/refresh.svg"));
+    ui->btn_pdf_stagiaire->setIcon(QIcon(":/icons/pdf.svg"));
+    ui->btn_qr_stagiaire->setIcon(QIcon(":/icons/qr.svg"));
+    ui->btn_email_stagiaire->setIcon(QIcon(":/icons/mail.svg"));
+    ui->btn_rechercher_stagiaire->setIcon(QIcon(":/icons/search.svg"));
+    ui->btn_reset_recherche_stagiaire->setIcon(QIcon(":/icons/refresh.svg"));
+    ui->btn_trier_stagiaire->setIcon(QIcon(":/icons/sort.svg"));
+
+    ui->btn_ajouter_stagiaire->setIconSize(tailleIconeAction);
+    ui->btn_modifier_stagiaire->setIconSize(tailleIconeAction);
+    ui->btn_supprimer_stagiaire->setIconSize(tailleIconeAction);
+    ui->btn_actualiser_stagiaire->setIconSize(tailleIconeAction);
+    ui->btn_pdf_stagiaire->setIconSize(tailleIconeAction);
+    ui->btn_qr_stagiaire->setIconSize(tailleIconeAction);
+    ui->btn_email_stagiaire->setIconSize(tailleIconeAction);
+    ui->btn_rechercher_stagiaire->setIconSize(tailleIconeAction);
+    ui->btn_reset_recherche_stagiaire->setIconSize(tailleIconeAction);
+    ui->btn_trier_stagiaire->setIconSize(tailleIconeAction);
+
+    // Actualisation statistiques
+    ui->btn_refresh_statistiques->setIcon(QIcon(":/icons/refresh.svg"));
+    ui->btn_refresh_statistiques->setIconSize(tailleIconeAction);
+
+
+    // =================================================
+    // NAVIGATION SIDEBAR
+    // =================================================
+
+    auto activerMenu = [this](QPushButton *bouton, int index)
+    {
+        ui->btn_menu_dashboard->setChecked(false);
+        ui->btn_menu_formateurs->setChecked(false);
+        ui->btn_menu_stagiaires->setChecked(false);
+        ui->btn_menu_statistiques->setChecked(false);
+
+        bouton->setChecked(true);
+        ui->stackedWidget->setCurrentIndex(index);
+    };
+
+    connect(
+        ui->btn_menu_dashboard,
+        &QPushButton::clicked,
+        this,
+        [this, activerMenu]()
+        {
+            activerMenu(ui->btn_menu_dashboard, 0);
+        }
+        );
+
+    connect(
+        ui->btn_menu_formateurs,
+        &QPushButton::clicked,
+        this,
+        [this, activerMenu]()
+        {
+            activerMenu(ui->btn_menu_formateurs, 1);
+        }
+        );
+
+    connect(
+        ui->btn_menu_stagiaires,
+        &QPushButton::clicked,
+        this,
+        [this, activerMenu]()
+        {
+            activerMenu(ui->btn_menu_stagiaires, 2);
+        }
+        );
+
+
+    connect(
+        ui->btn_menu_statistiques,
+        &QPushButton::clicked,
+        this,
+        [this, activerMenu]()
+        {
+            afficherStatistiquesStagiaires();
+            afficherStatistiquesFormateurs();
+            activerMenu(ui->btn_menu_statistiques, 3);
+        }
+        );
+
+    connect(
+        ui->btn_refresh_statistiques,
+        &QPushButton::clicked,
+        this,
+        [this]()
+        {
+            afficherStatistiquesStagiaires();
+            afficherStatistiquesFormateurs();
+        }
+        );
+
+
+    // =================================================
+    // STYLE GENERAL
+    // =================================================
+
+    setStyleSheet(R"(
+
+    /* =============================================
+       FENETRE GENERALE
+       ============================================= */
+
+    QMainWindow {
+        background-color: #F4F7FB;
+    }
+
+    QWidget {
+        font-family: "Segoe UI";
+        font-size: 13px;
+        color: #1F2937;
+    }
+
+
+    /* =============================================
+       GROUP BOX
+       ============================================= */
+
+    QGroupBox {
+        background-color: white;
+        border: 1px solid #D8E0EA;
+        border-radius: 9px;
+        margin-top: 14px;
+        padding: 16px 10px 10px 10px;
+        font-weight: 600;
+    }
+
+    QGroupBox::title {
+        subcontrol-origin: margin;
+        subcontrol-position: top left;
+        left: 14px;
+        padding-left: 7px;
+        padding-right: 7px;
+        color: #1E3A5F;
+        background-color: #F4F7FB;
+        font-weight: 700;
+    }
+
+
+    /* =============================================
+       CHAMPS
+       ============================================= */
+
+    QLineEdit,
+    QComboBox,
+    QDateEdit,
+    QSpinBox {
+        background-color: white;
+        border: 1px solid #CBD5E1;
+        border-radius: 6px;
+        padding: 6px 9px;
+        min-height: 24px;
+    }
+
+
+    /* =============================================
+       BOUTONS PAR DEFAUT
+       Bleu
+       ============================================= */
+
+    QPushButton {
+        background-color: #2563EB;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 7px 15px;
+        min-height: 24px;
+        font-weight: 600;
+    }
+
+    QPushButton:hover {
+        background-color: #1D4ED8;
+    }
+
+
+    /* =============================================
+       AJOUTER
+       #249F9F
+       ============================================= */
+
+    QPushButton#btn_ajouter,
+    QPushButton#btn_ajouter_stagiaire {
+        background-color: #249F9F;
+        color: white;
+    }
+
+    QPushButton#btn_ajouter:hover,
+    QPushButton#btn_ajouter_stagiaire:hover {
+        background-color: #1C8585;
+    }
+
+
+    /* =============================================
+       RECHERCHER
+       #249F9F
+       ============================================= */
+
+    QPushButton#btn_rechercher_formateur,
+    QPushButton#btn_rechercher_stagiaire {
+        background-color: #249F9F;
+        color: white;
+    }
+
+    QPushButton#btn_rechercher_formateur:hover,
+    QPushButton#btn_rechercher_stagiaire:hover {
+        background-color: #1C8585;
+    }
+
+
+    /* =============================================
+       TRIER
+       #249F9F
+       ============================================= */
+
+    QPushButton#btn_trier_formateur,
+    QPushButton#btn_trier_stagiaire {
+        background-color: #249F9F;
+        color: white;
+    }
+
+    QPushButton#btn_trier_formateur:hover,
+    QPushButton#btn_trier_stagiaire:hover {
+        background-color: #1C8585;
+    }
+
+
+    /* =============================================
+       GENERER PDF
+       #249F9F
+       ============================================= */
+
+    QPushButton#btn_pdf_formateur,
+    QPushButton#btn_pdf_stagiaire {
+        background-color: #249F9F;
+        color: white;
+    }
+
+    QPushButton#btn_pdf_formateur:hover,
+    QPushButton#btn_pdf_stagiaire:hover {
+        background-color: #1C8585;
+    }
+
+
+/* =============================================
+   MODIFIER - BLEU #388BD9
+   ============================================= */
+
+QPushButton#btn_modifier,
+QPushButton#btn_modifier_stagiaire {
+    background-color: #388BD9;
+    color: white;
+}
+
+QPushButton#btn_modifier:hover,
+QPushButton#btn_modifier_stagiaire:hover {
+    background-color: #307CC4;
+}
+
+QPushButton#btn_modifier:pressed,
+QPushButton#btn_modifier_stagiaire:pressed {
+    background-color: #286DAD;
+}
+
+
+    /* =============================================
+       SUPPRIMER
+       ROUGE
+       ============================================= */
+
+    QPushButton#btn_supprimer,
+    QPushButton#btn_supprimer_stagiaire {
+        background-color: #DC2626;
+        color: white;
+    }
+
+    QPushButton#btn_supprimer:hover,
+    QPushButton#btn_supprimer_stagiaire:hover {
+        background-color: #B91C1C;
+    }
+
+
+    /* =============================================
+       ACTUALISER + REINITIALISER
+       GRIS BLEU
+       ============================================= */
+
+    QPushButton#btn_actualiser,
+    QPushButton#btn_actualiser_stagiaire,
+    QPushButton#btn_reset_recherche_formateur,
+    QPushButton#btn_reset_recherche_stagiaire {
+        background-color: #64748B;
+        color: white;
+    }
+
+    QPushButton#btn_actualiser:hover,
+    QPushButton#btn_actualiser_stagiaire:hover,
+    QPushButton#btn_reset_recherche_formateur:hover,
+    QPushButton#btn_reset_recherche_stagiaire:hover {
+        background-color: #475569;
+    }
+
+
+/* =============================================
+   QR CODE + ENVOYER EMAIL
+   VERT #249F9F
+   ============================================= */
+
+QPushButton#btn_qr_stagiaire,
+QPushButton#btn_email_stagiaire {
+    background-color: #249F9F;
+    color: white;
+}
+
+QPushButton#btn_qr_stagiaire:hover,
+QPushButton#btn_email_stagiaire:hover {
+    background-color: #1C8585;
+}
+
+QPushButton#btn_qr_stagiaire:pressed,
+QPushButton#btn_email_stagiaire:pressed {
+    background-color: #176F6F;
+}
+
+
+    /* =============================================
+       TABLEAUX
+       ============================================= */
+
+    QTableView {
+        background-color: white;
+        alternate-background-color: #F8FAFC;
+
+        border: 1px solid #D8E0EA;
+        border-radius: 8px;
+
+        gridline-color: #E5E7EB;
+
+        selection-background-color: #D9F2F2;
+        selection-color: #1E3A5F;
+    }
+
+
+    /* =============================================
+       EN-TETE TABLEAU
+       ============================================= */
+
+    QHeaderView::section {
+        background-color: #1E3A5F;
+        color: white;
+
+        border: none;
+        border-right: 1px solid #365472;
+
+        padding: 8px;
+
+        font-weight: 600;
+    }
+
+)");
+
 
     // =================================================
     // VALEURS PAR DEFAUT
@@ -953,10 +1370,7 @@ void MainWindow::afficherStatistiquesFormateurs()
 
 
     chart->setTitle(
-        "Répartition des formateurs par spécialité "
-        "(Total : "
-        + QString::number(total)
-        + ")"
+        "Nombre de formateurs par spécialité"
         );
 
 
@@ -1720,8 +2134,8 @@ void MainWindow::on_btn_trier_stagiaire_clicked()
 
 void MainWindow::afficherStatistiquesStagiaires()
 {
+    // Nettoyer l'ancien graphique
     QLayoutItem *item;
-
 
     while (
         (item =
@@ -1749,22 +2163,16 @@ void MainWindow::afficherStatistiquesStagiaires()
     }
 
 
-    int total = 0;
+    QBarSet *barSet =
+        new QBarSet(
+            "Stagiaires"
+            );
 
 
-    for (int i = 0;
-         i < model->rowCount();
-         ++i)
-    {
-        total +=
-            model->index(i, 1)
-                .data()
-                .toInt();
-    }
+    QStringList categories;
 
-
-    QPieSeries *series =
-        new QPieSeries();
+    int maximum =
+        0;
 
 
     for (int i = 0;
@@ -1791,42 +2199,39 @@ void MainWindow::afficherStatistiquesStagiaires()
         }
 
 
-        if (nombre > 0 &&
-            total > 0)
+        categories
+            << niveau;
+
+
+        *barSet
+            << nombre;
+
+
+        if (nombre > maximum)
         {
-            double pourcentage =
-                (
-                    static_cast<double>(nombre)
-                    / total
-                    )
-                * 100.0;
-
-
-            QString etiquette =
-                niveau
-                + " : "
-                + QString::number(nombre)
-                + " ("
-                + QString::number(
-                    pourcentage,
-                    'f',
-                    1
-                    )
-                + "%)";
-
-
-            QPieSlice *slice =
-                series->append(
-                    etiquette,
-                    nombre
-                    );
-
-
-            slice->setLabelVisible(
-                true
-                );
+            maximum =
+                nombre;
         }
     }
+
+
+    QBarSeries *series =
+        new QBarSeries();
+
+
+    series->append(
+        barSet
+        );
+
+
+    series->setLabelsVisible(
+        true
+        );
+
+
+    series->setLabelsPosition(
+        QAbstractBarSeries::LabelsOutsideEnd
+        );
 
 
     QChart *chart =
@@ -1839,21 +2244,74 @@ void MainWindow::afficherStatistiquesStagiaires()
 
 
     chart->setTitle(
-        "Répartition des stagiaires par niveau "
-        "(Total : "
-        + QString::number(total)
-        + ")"
+        "Nombre de stagiaires par niveau"
+        );
+
+
+    chart->setAnimationOptions(
+        QChart::SeriesAnimations
         );
 
 
     chart->legend()
-        ->setVisible(true);
+        ->setVisible(false);
 
 
-    chart->legend()
-        ->setAlignment(
-            Qt::AlignBottom
-            );
+    QBarCategoryAxis *axisX =
+        new QBarCategoryAxis();
+
+
+    axisX->append(
+        categories
+        );
+
+
+    chart->addAxis(
+        axisX,
+        Qt::AlignBottom
+        );
+
+
+    series->attachAxis(
+        axisX
+        );
+
+
+    QValueAxis *axisY =
+        new QValueAxis();
+
+
+    axisY->setMin(
+        0
+        );
+
+
+    axisY->setMax(
+        maximum > 0
+            ? maximum + qMax(2, maximum / 5)
+            : 10
+        );
+
+
+    axisY->setLabelFormat(
+        "%d"
+        );
+
+
+    axisY->setTickCount(
+        6
+        );
+
+
+    chart->addAxis(
+        axisY,
+        Qt::AlignLeft
+        );
+
+
+    series->attachAxis(
+        axisY
+        );
 
 
     QChartView *chartView =
